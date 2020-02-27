@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 30%;
+}
+
+.right {
+  width: 70%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+</body>
+<div class="row">
+  <div class="column left">
+
+<div class="container">
+  <div class="card" style="width:100%">
+    <img src="{{ url_for('static', filename=image)}}"  alt="Card Image"  style="width:100%;">
+    <div class="card-body">
+      <h4 class="card-title">{{username}}</h4>
+      {% if own == "True" %}
+      <p class="card-text">{{email}}</p>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Change image</a>
+      {% endif %}
+    </div>
+  </div>
+  <br>
+</div>
+  </div>
+
+    <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Upload files</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action = "/uploader" method = "POST"
+            enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit"/>
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+
+      </div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+
+{% endblock %}

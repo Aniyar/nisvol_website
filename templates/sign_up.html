@@ -13,30 +13,81 @@
 <body>
 
 <div class="container">
-  <h4><span class="glyphicon glyphicon-lock"></span>Sign up</h4>
+  <h4><span class="glyphicon glyphicon-lock"></span>Создать аккаунт</h4>
   <p>{{title}}</p>
     <form role="form" method="post">
     <div class="form-group">
       <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
-      <input type="email" class="form-control" id="email" name= 'email' placeholder="Enter email">
+      <input type="email" class="form-control" id="email" name= 'email' placeholder="Введите email">
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
-      <label for="uname">Username:</label>
-      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <label for="pswd"><span class="glyphicon glyphicon-eye-open"></span>Пароль</label>
+      <input type="password" class="form-control" id="pswd" placeholder="Введите пароль" name="pswd" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="row">
+      <div class="column">
+            <div class="form-group">
+            <label for="surname"><span class="glyphicon glyphicon-eye-open"></span>Фамилия</label>
+            <input type="text" class="form-control" id="surname" placeholder="Введите фамилию" name="surname" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+      </div>
+      <div class="column">
+            <div class="form-group">
+            <label for="name"><span class="glyphicon glyphicon-eye-open"></span>Имя</label>
+            <input type="text" class="form-control" id="name" placeholder="Введите имя" name="name" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+      </div>
+      <div class="column">
+            <div class="form-group">
+            <label for="fname"><span class="glyphicon glyphicon-eye-open"></span>Отчество</label>
+            <input type="text" class="form-control" id="fname" placeholder="Введите отчество" name="fname" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date"><span class="glyphicon glyphicon-eye-open"></span>Дата рождения</label>
+      <input type="date" class="form-control" id="date" placeholder="Введите дату рождения" name="date" required>
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
-      <label for="pswd"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+      <label for="doc_id"><span class="glyphicon glyphicon-eye-open"></span>ИНН/Номер Уд.Личности/Пасспорта</label>
+      <input type="text" class="form-control" id="doc_id" placeholder="Введите номер документа" name="doc_id" required>
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="city"><span class="glyphicon glyphicon-eye-open"></span>Город</label>
+          <select id="city">
+            <option value="ast">Astana</option>
+            <option value="ala">Almaty</option>
+            <option value="semei">Semei</option>
+            <option value="krg">Karaganda</option>
+          </select>
+    </div>
+    <div class="form-group">
+      <label for="school"><span class="glyphicon glyphicon-eye-open"></span>City</label>
+          <select id="school">
+            <option value="ast">NIS PH&M Astana</option>
+            <option value="ala">NIS PH&M Almaty</option>
+            <option value="semei">NIS PH&M Semei</option>
+            <option value="krg">NIS PH&M Karaganda</option>
+          </select>
     </div>
     <div class="form-group form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+        <input class="form-check-input" type="checkbox" name="remember" required>Я соглашаюсь на обработку данных и бла бла бла.
         <div class="valid-feedback">Valid.</div>
         <div class="invalid-feedback">Check this checkbox to continue.</div>
       </label>
@@ -52,8 +103,5 @@
     document.getElementById("login_btn").onclick = function () {
     location.href = "/login";
     };
-    <!--document.getElementById("submit_btn").onclick = function () {-->
-    <!--location.href = "/main";-->
-    <!--};-->
 </script>
 </html>

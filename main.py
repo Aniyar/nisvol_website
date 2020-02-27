@@ -29,8 +29,7 @@ def login():
             um.init_table()
             print(um.get_all())
             if um.exists(request.form['email'], request.form['pswd']):
-                username = um.get_username(request.form['email'])
-                session['username'] = username
+                session['username'] = um.get_username(request.form['email'])
                 return redirect('/main')
             else:
                 return render_template('login.html', title='Wrong email or password')
@@ -39,12 +38,13 @@ def login():
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'GET':
-        return render_template('sign_up.html', title='Please fill in this form to create an account:')
+        return render_template('sign_up.html')
     elif request.method == 'POST':
         um = UsersModel(db.get_connection())
         um.init_table()
-        um.insert(request.form['email'], request.form['uname'], request.form['pswd'])
-        session['username'] = request.form['uname']
+        um.insert(request.form['email'], request.form['pswd'], request.form['surname'], request.form['name'],
+                  request.form['fname'], request.form['city'], request.form['school'], request.form['doc_id'])
+        session['username'] = request.form['email']
         print(um.get_all())
         return redirect('/main')
 
@@ -62,7 +62,7 @@ def my_page():
     if 'username' not in session:
         return redirect('/login')
     if request.method == 'GET':
-        nm = NewsModel(db.get_connection())
+        nm = EventsModel(db.get_connection())
         nm.init_table()
         um = UsersModel(db.get_connection())
         um.init_table()
@@ -83,7 +83,7 @@ def about():
 def delete_news(news_id):
     if 'username' not in session:
         return redirect('/login')
-    nm = NewsModel(db.get_connection())
+    nm = EventsModel(db.get_connection())
     nm.delete(news_id)
     return redirect("/index")
 
@@ -110,46 +110,42 @@ def main():
     return render_template('home.html', news=em.get_all())
 
 
-# def main():
-#     # if 'username' not in session:
-#     #     return redirect('/login')
-#     em = EventsModel(db.get_connection())
-#     em.init_table()
-#     em = UsersModel(db.get_connection())
-#     em.init_table()
-#     # nm.delete_all()
-#     if request.method == "POST":
-#         # content = request.form["comment"]
-#         # # content = request.files["uploadingfiles"]
-#         # avatar = um.get_avatar(session['username'])
-#         # print(avatar)
-#         # nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'], avatar)
-#         # for i in nm.get_all():
-#         #     check_if_avatar_exists(i)
-#         # return redirect("/main")
-#         return
-#     else:
-#         print(em.get_all())
-#         return render_template('home.html', title='Добавление новости', username=session['username'], news=em.get_all())
+def main():
+    if 'username' not in session:
+        return redirect('/login')
+    em = EventsModel(db.get_connection())
+    em.init_table()
+    um = UsersModel(db.get_connection())
+    um.init_table()
+    # nm.delete_all()
+    if request.method == "POST":
+        content = request.form["comment"]
+        # content = request.files["uploadingfiles"]
+        avatar = um.get_avatar(session['username'])
+        print(avatar)
+        em.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'], avatar)
+        return redirect("/main")
+    else:
+        return render_template('home.html', title='Добавление новости', username=session['username'], news=em.get_all())
 
 
 @app.route('/user/<uname>', methods=['GET'])
 def show_user(uname):
     if 'username' not in session:
         return redirect('/login')
-    nm = NewsModel(db.get_connection())
-    nm.init_table()
+    em = EventsModel(db.get_connection())
+    em.init_table()
     um = UsersModel(db.get_connection())
     um.init_table()
-    em = um.get_email(session['username'])
+    email = um.get_email(session['username'])
     image = um.get_avatar(uname)
     if uname == session['username']:
         owning = 'True'
     else:
         owning = 'False'
     if request.method == "GET":
-        print(nm.get_all(uname))
-        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em,
+        print(um.get_all(uname))
+        return render_template('account.html', username=uname, news=um.get_all(uname), email=email,
                                own=owning, image=image)
 
 
@@ -160,5 +156,5 @@ def check_if_avatar_exists(item):
         print('f')
 
 
-if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+if __name__ == "__main__":
+    app.run(debug=True)

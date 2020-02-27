@@ -32,6 +32,9 @@ class EventsModel:
         row = cursor.fetchone()
         return row
 
+    # def get_all(self, username):
+    #     cur
+
     def get_from_city(self, city=None):
         cursor = self.connection.cursor()
         if city:

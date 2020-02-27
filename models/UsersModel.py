@@ -10,36 +10,30 @@ class UsersModel:
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
                             (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                              email VARCHAR(50),
-                             password_hash VARCHAR(128),
+                             password_hash VARCHAR(256),
                              surname VARCHAR(20),
                              name VARCHAR(20),
                              fname VARCHAR(20),
                              city INTEGER (2),
                              school INTEGER(2),
-                             phone VARCHAR(13),
                              doc_id VARCHAR(12),
                              img VARCHAR(128)
                              )''')
         # cursor.close()
         self.connection.commit()
 
-    def insert(self, email, password_hash, surname, name, fname, city, school, phone, doc_id, img="twitter1.jpg"):
+    def insert(self, email, password_hash, surname, name, fname, city, school, doc_id, img="twitter1.jpg"):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users 
-                          (email, password_hash, surname, name, fname, city, school, phone, doc_id, img) 
-                          VALUES (?,?,?,?)''''''''', (email, password_hash, surname, name, fname, city, school, phone, doc_id, img))
+                          (email, password_hash, surname, name, fname, city, school, doc_id, img) 
+                          VALUES (?,?,?,?,?,?,?,?,?)''''''''''''''''', (email, password_hash, surname, name, fname,
+                                                                        city, school, doc_id, img))
         # cursor.close()
         self.connection.commit()
 
-    def get_username(self, email):
+    def get_email(self, id):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT user_name FROM users WHERE email = ?", (email, ))
-        row = cursor.fetchone()
-        return row[0]
-
-    def get_email(self, username):
-        cursor = self.connection.cursor()
-        cursor.execute("SELECT email FROM users WHERE user_name = ?", (username, ))
+        cursor.execute("SELECT email FROM users WHERE id = ?", (id, ))
         row = cursor.fetchone()
         return row[0]
 
