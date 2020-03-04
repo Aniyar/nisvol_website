@@ -1,72 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>NISVOLUNTEERS</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
+    <title>NISVOLUNTEERS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-  <body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-<!— Brand/logo —>
-<a class="navbar-brand" href="#">
-
-<form method="get">
-<button type="submit" class="btn btn-primary">
-<img src="{{ url_for('static', filename='logo.png') }}" alt="logo" style="width:60px;"/>
-</button>
-</form>
-</a>
-<!— Links —>
-<ul class="navbar-nav">
-<li class="nav-item">
-<a class="nav-link" href="/main">Главная</a>
-</li>
-<li class="nav-item">
-<form method="get" action="/about">
-<a class="nav-link" href="about">О нас</a>
-</form>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="#"></a>
-</li>
-<li class="nav-item">
-<form method="get" action="/my_page">
-<a class="nav-link" href="my_page">Моя страница</a>
-</form>
-</li>
-<li class="nav-item">
-<form method="get" action="/logout">
-<a class="nav-link" href="logout">Выйти</a>
-</form>
-</li>
-<input class="form-control" type="text" id='usr' placeholder="Поиск">
-<button class="btn btn-success" type="submit" id="search_btn">Search</button>
-</form>
-</ul>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">NISVOLUNTEERS</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a class="nav-link" href="/main">Главная</a></li>
+            <li><a class="nav-link" href="about">О нас</a></li>
+            <li><a class="nav-link" href="my_page">Моя страница</a></li>
+            <li><a class="nav-link" href="logout">Выйти</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
 </nav>
-
-<div class="container-fluid">
-<h3>NISVOLUNTEERS</h3>
-<p>Volunteering make a difference</p>
-</div>
 
 
 <!— Begin page content —>
 <main role="main" class="container">
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </main>
 </body>
-<!--<script>-->
-<!--    document.getElementById("search_btn").onclick = function () {-->
-<!--    var username = document.getElementById('usr').value;-->
-<!--    location.href = "/user/" + username;-->
-<!--    };-->
-<!--</script>-->
 </html>

@@ -12,12 +12,12 @@ from werkzeug.utils import secure_filename
 
 db = DB()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLD = './static'
-UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+#
+# APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+# UPLOAD_FOLD = './static'
+# UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -27,7 +27,6 @@ def login():
         elif request.method == 'POST':
             um = UsersModel(db.get_connection())
             um.init_table()
-            print(um.get_all())
             if um.exists(request.form['email'], request.form['pswd']):
                 session['username'] = um.get_username(request.form['email'])
                 return redirect('/main')
