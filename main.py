@@ -38,8 +38,9 @@ def sign_up():
     elif request.method == 'POST':
         um = UsersModel(db.get_connection())
         um.init_table()
-        um.insert(request.form['email'], request.form['pswd'], request.form['surname'], request.form['name'],
-                  request.form['fname'], request.form['city'], request.form['school'], request.form['doc_id'])
+        um.insert(request.form['email'], request.form['pswd'], request.form['surname'],
+                  request.form['name'], request.form['fname'], request.form['date'],
+                  request.form['city'], request.form['school'], request.form['doc_id'])
         session['username'] = request.form['email']
         print(um.get_all())
         return redirect('/main')
@@ -141,5 +142,5 @@ def check_if_avatar_exists(item):
         print('f')
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(port=8080, host='127.0.0.1')

@@ -21,7 +21,7 @@ class EventsModel:
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO events 
                           (date, status, name, vol_number, content, city, location) 
-                          VALUES (?,?,?,?)''''''''''', (time, status, name, number, content, city, loc))
+                          VALUES (?,?,?,?,?,?,?)''''''''''', (time, status, name, number, content, city, loc))
         cursor.close()
         self.connection.commit()
 

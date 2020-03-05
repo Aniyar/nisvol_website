@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Add event
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Добавить ивент
 </button>
 <div class="row">
     <div class="col-sm-8">
@@ -23,9 +22,11 @@
             </div>
             {% endfor %}
         </div>
-    </div>
+        <div class="container-fluid">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NEbi_rtk2aw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        </div>
     <div class="col-sm-4">
-        <div class="well">
             <h3>Мы в социальных сетях</h3>
             <div class="list-group">
                 <li class="list-group-item">
@@ -408,7 +409,7 @@
             </div>
 
         </div>
-    </div>
+
 </div>
 
 
@@ -419,7 +420,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h2 class="modal-title">Add News</h2>
+                <h2 class="modal-title">Добавление ивента</h2>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <!-- Modal body -->
@@ -467,8 +468,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Add</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-danger">Опубликовать</button>
                     </div>
                 </div>
             </form>

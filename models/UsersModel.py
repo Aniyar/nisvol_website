@@ -14,6 +14,7 @@ class UsersModel:
                              surname VARCHAR(20),
                              name VARCHAR(20),
                              fname VARCHAR(20),
+                             birthdate VARCHAR(100),
                              city INTEGER (2),
                              school INTEGER(2),
                              doc_id VARCHAR(12),
@@ -22,11 +23,11 @@ class UsersModel:
         # cursor.close()
         self.connection.commit()
 
-    def insert(self, email, password_hash, surname, name, fname, city, school, doc_id, img="twitter1.jpg"):
+    def insert(self, email, password_hash, surname, name, fname, date, city, school, doc_id, img="twitter1.jpg"):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users 
-                          (email, password_hash, surname, name, fname, city, school, doc_id, img) 
-                          VALUES (?,?,?,?,?,?,?,?,?)''''''''''''''''', (email, password_hash, surname, name, fname,
+                          (email, password_hash, surname, name, fname, birthdate, city, school, doc_id, img) 
+                          VALUES (?,?,?,?,?,?,?,?,?,?)''''''''''''''''''''', (email, password_hash, surname, name, fname, date,
                                                                         city, school, doc_id, img))
         # cursor.close()
         self.connection.commit()
