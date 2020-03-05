@@ -7,22 +7,21 @@ class EventsModel:
         cursor.execute('''CREATE TABLE IF NOT EXISTS events 
                                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                                  date VARCHAR(100),
-                                 status INTEGER(1),
+                                 status VARCHAR(15),
                                  name VARCHAR(100),
                                  vol_number INTEGER(3),
                                  content VARCHAR(1000),
                                  city INTEGER(2),
-                                 location varchar(100),
-                                 photo varchar (50)
+                                 location varchar(100)
                                  )''')
         cursor.close()
         self.connection.commit()
 
-    def insert(self, time, status, name, number, content, city, loc, photo=None):
+    def insert(self, time, status, name, number, content, city, loc):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO events 
-                          (date, status, name, vol_number, content, city, location, photo) 
-                          VALUES (?,?,?,?)''''''''''', (time, status, name, number, content, city, loc, photo))
+                          (date, status, name, vol_number, content, city, location) 
+                          VALUES (?,?,?,?)''''''''''', (time, status, name, number, content, city, loc))
         cursor.close()
         self.connection.commit()
 
@@ -32,8 +31,11 @@ class EventsModel:
         row = cursor.fetchone()
         return row
 
-    # def get_all(self, username):
-    #     cur
+    def get_all(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM events")
+        rows = cursor.fetchall()
+        return rows
 
     def get_from_city(self, city=None):
         cursor = self.connection.cursor()

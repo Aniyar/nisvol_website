@@ -1,9 +1,6 @@
-# from flask_wtf import FlaskForm
-# from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-# from wtforms.validators import DataRequired
 from flask import Flask, render_template, redirect, request, session
 import time
-# import requests
+import requests
 from models.EventsModel import EventsModel
 from db import DB
 from models.UsersModel import UsersModel
@@ -104,28 +101,17 @@ def change_img():
 def main():
     em = EventsModel(db.get_connection())
     em.init_table()
-    em = UsersModel(db.get_connection())
-    em.init_table()
-    return render_template('home.html', news=em.get_all())
-
-
-def main():
-    if 'username' not in session:
-        return redirect('/login')
-    em = EventsModel(db.get_connection())
-    em.init_table()
     um = UsersModel(db.get_connection())
     um.init_table()
-    # nm.delete_all()
     if request.method == "POST":
-        content = request.form["comment"]
-        # content = request.files["uploadingfiles"]
-        avatar = um.get_avatar(session['username'])
-        print(avatar)
-        em.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'], avatar)
+        name, date, volnum, city, loc, description = request.form["name"], request.form["evdate"], \
+                                               request.form["volnum"], request.form["cityselect"], \
+                                               request.form["location"], request.form["description"]
+        status = "Ведется набор"
+        em.insert(date, status, name, volnum, description, city, loc)
         return redirect("/main")
     else:
-        return render_template('home.html', title='Добавление новости', username=session['username'], news=em.get_all())
+        return render_template('home.html',  events=em.get_all())
 
 
 @app.route('/user/<uname>', methods=['GET'])
