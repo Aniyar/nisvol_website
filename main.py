@@ -9,12 +9,12 @@ from werkzeug.utils import secure_filename
 
 db = DB()
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-#
-# APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-# UPLOAD_FOLD = './static'
-# UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLD = './static'
+UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -25,7 +25,7 @@ def login():
             um = UsersModel(db.get_connection())
             um.init_table()
             if um.exists(request.form['email'], request.form['pswd']):
-                session['username'] = um.get_username(request.form['email'])
+                session['username'] = request.form['email']
                 return redirect('/main')
             else:
                 return render_template('login.html', title='Wrong email or password')
@@ -40,7 +40,7 @@ def sign_up():
         um.init_table()
         um.insert(request.form['email'], request.form['pswd'], request.form['surname'],
                   request.form['name'], request.form['fname'], request.form['date'],
-                  request.form['city'], request.form['school'], request.form['doc_id'])
+                  request.form.get('city'), request.form.get('school'), request.form['doc_id'])
         session['username'] = request.form['email']
         print(um.get_all())
         return redirect('/main')
@@ -97,7 +97,7 @@ def change_img():
         return redirect('/my_page')
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 @app.route('/main', methods=['POST', 'GET'])
 def main():
     em = EventsModel(db.get_connection())
@@ -106,7 +106,7 @@ def main():
     um.init_table()
     if request.method == "POST":
         name, date, volnum, city, loc, description = request.form["name"], request.form["evdate"], \
-                                               request.form["volnum"], request.form["cityselect"], \
+                                               request.form["volnum"], request.form.get("cityselect"), \
                                                request.form["location"], request.form["description"]
         status = "Ведется набор"
         em.insert(date, status, name, volnum, description, city, loc)

@@ -23,7 +23,7 @@ class UsersModel:
         # cursor.close()
         self.connection.commit()
 
-    def insert(self, email, password_hash, surname, name, fname, date, city, school, doc_id, img="twitter1.jpg"):
+    def insert(self, email, password_hash, surname, name, fname, date, city, school, doc_id, img="banner.jpg"):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users 
                           (email, password_hash, surname, name, fname, birthdate, city, school, doc_id, img) 
