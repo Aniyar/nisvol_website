@@ -7,21 +7,22 @@ class EventsModel:
         cursor.execute('''CREATE TABLE IF NOT EXISTS events 
                                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                                  date VARCHAR(100),
-                                 status VARCHAR(15),
+                                 status INTEGER(1),
                                  name VARCHAR(100),
                                  vol_number INTEGER(3),
-                                 content VARCHAR(1000),
+                                 content VARCHAR(1500),
                                  city INTEGER(2),
-                                 location varchar(100)
+                                 location varchar(100),
+                                 img varchar(128)
                                  )''')
         cursor.close()
         self.connection.commit()
 
-    def insert(self, time, status, name, number, content, city, loc):
+    def insert(self, time, status, name, number, content, city, loc, img=None):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO events 
-                          (date, status, name, vol_number, content, city, location) 
-                          VALUES (?,?,?,?,?,?,?)''''''''''', (time, status, name, number, content, city, loc))
+                          (date, status, name, vol_number, content, city, location, img) 
+                          VALUES (?,?,?,?,?,?,?,?)''''''''''''''', (time, status, name, number, content, city, loc, img))
         cursor.close()
         self.connection.commit()
 

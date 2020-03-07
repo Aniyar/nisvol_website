@@ -108,8 +108,15 @@ def main():
         name, date, volnum, city, loc, description = request.form["name"], request.form["evdate"], \
                                                request.form["volnum"], request.form.get("cityselect"), \
                                                request.form["location"], request.form["description"]
-        status = "Ведется набор"
-        em.insert(date, status, name, volnum, description, city, loc)
+        status = 0
+        if 'file' in request.files:
+            file = request.files['file']
+            filename = file.filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            filename = None
+        print(filename)
+        em.insert(date, status, name, volnum, description, city, loc, filename)
         return redirect("/main")
     else:
         return render_template('home.html',  events=em.get_all())

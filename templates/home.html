@@ -8,14 +8,13 @@
         <div class="container-fluid">
             {% for item in events | reverse %}
             <div class="container mt-3">
-                <div class="media-border p-3">
+<div class="card card-body bg-light">
                     <div class="media-body">
                         <h3>{{item[3]}} <small><i> {{item[1]}}</i></small></h3>
                         <h5>Нужно волонтеров: {{item[4]}}</h5>
-                        <h5>Статус: {{item[2]}}</h5>
-                        <h5>Город: {{item[6]}}</h5>
-                        <h5>Локация: {{item[7]}}</h5>
-                        <p id="comment" name="comment">{{item[5]}}</p>
+                        <h5><i class="fa fa-location-arrow"></i> {{item[6]}}, {{item[7]}}</h5>
+                        <p style="white-space: pre-line" id="comment" name="comment">{{item[5]}}</p>
+                        <img src="static/{{item[8]}}"  alt="Card Image"  style="width:100%;">
                     </div>
                     <button type="button">Учавствовать!</button>
                 </div>
@@ -28,7 +27,7 @@
         </div>
     <div class="col-sm-4">
             <h3>Мы в социальных сетях</h3>
-            <div class="list-group">
+            <div class="list-group" style="height:3000px">
                 <li class="list-group-item">
                     <blockquote class="instagram-media" data-instgrm-captioned
                                 data-instgrm-permalink="https://www.instagram.com/p/B2tEWtpg5FO/?utm_source=ig_embed&amp;utm_campaign=loading"
@@ -424,7 +423,7 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <!-- Modal body -->
-            <form class="box" method="post" action="" enctype="multipart/form-data">
+            <form class="box" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Название</label>
@@ -432,24 +431,21 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="evdate">Дата:</label>
-                                <input type="date" id="evdate" name="evdate">
+                                <input class="form-control" type="date" id="evdate" name="evdate">
                             </div>
                             <div class="col-sm-4">
-                                <div class="input-group mb-3">
-                                      <div class="input-group-prepend">
-                                        <label class="input-group-text" for="cityselect">Город</label>
-                                      </div>
-                                      <select class="custom-select" id="cityselect">
+                                        <label for="cityselect">Город:</label>
+
+                                      <select class="custom-select" name="cityselect" id="cityselect">
                                         <option selected>Выбрать...</option>
-                                        <option value="Astana">Астана</option>
-                                        <option value="Almaty">Алматы</option>
-                                        <option value="Semei">Семей</option>
+                                        <option value="Астана">Астана</option>
+                                        <option value="Алматы">Алматы</option>
+                                        <option value="Семей">Семей</option>
                                       </select>
-                                    </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="volnum">Кол-во волонтеров:</label>
-                                <input type="number" id="volnum" name="volnum">
+                                <label for="volnum"># волонтеров:</label>
+                                <input class="form-control" type="number" id="volnum" name="volnum">
                             </div>
                         </div>
 
@@ -462,7 +458,7 @@
                     </div>
 
                     <div class="box__input">
-                        <input class="box__file" type="file" name="uploadingfiles" id="file"
+                        <input class="box__file" type="file" name="file" id="file"
                                data-multiple-caption="{count} files selected" multiple/>
                         <!--<button class="box__button" type="submit">Upload</button>-->
                     </div>
